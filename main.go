@@ -15,22 +15,22 @@ type Response struct {
 	Succes   bool
 }
 
-func Ping(url *string, ch chan Response) {
+func Ping(url string, ch chan Response) {
 	start := time.Now()
 
 	client := http.Client{
 		Timeout: 5 * time.Second,
 	}
 
-	resp, err := client.Get(*url)
+	resp, err := client.Get(url)
 	if err != nil {
-		ch <- Response{Duration: time.Since((start)), URL: *url, Succes: false}
+		ch <- Response{Duration: time.Since((start)), URL: url, Succes: false}
 		return
 	}
 
 	defer resp.Body.Close()
 
-	ch <- Response{Duration: time.Since((start)), URL: *url, Succes: true}
+	ch <- Response{Duration: time.Since((start)), URL: url, Succes: true}
 }
 
 func main() {
@@ -54,7 +54,7 @@ func main() {
 	ch := make(chan Response)
 
 	for _, val := range sites {
-		go Ping(&val, ch)
+		go Ping(val, ch)
 	}
 
 	for i := 0; i < len(sites); i++ {
