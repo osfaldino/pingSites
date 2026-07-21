@@ -52,12 +52,17 @@ func main() {
 	sites := strings.Split(fileContent, "\n")
 
 	ch := make(chan Response)
-
+	counter := 0
 	for _, val := range sites {
+		val = strings.TrimSpace(val)
+		if val == "" {
+			continue
+		}
+		counter++
 		go Ping(val, ch)
 	}
 
-	for i := 0; i < len(sites); i++ {
+	for i := 0; i < counter; i++ {
 		res := <-ch
 
 		if res.Succes {
