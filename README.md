@@ -1,15 +1,16 @@
-# Это проект для параллельного пинга выбранных серверов
-
-## Как Закинуть программу в терминал?
+##This project is designed for parallel pinging of selected servers
+#Installation & Configuration
 
 ```bash
-go build -o pingSites main.go # компилируем бинарник
-sudo cp pingSites /usr/local/bin/ # кидаем в bin программу
-sudo cp sites.conf /usr/local/bin/ # кидаем в bin конфиг
+go build -o pingSites main.go # compile the binary
+sudo cp pingSites /usr/local/bin/ # move the program to bin
+sudo cp sites.conf /usr/local/bin/ # move the config to bin
 ```
 
-## Как изменить конфиг?
+How to edit the configuration file?
 ```bash
-sudo nano /usr/local/bin/sites.conf # изменяем конфиг
+sudo nano /usr/local/bin/sites.conf # edit the config file
 ```
-каждый URL должен быть на новой строке
+
+#Each URL should be on a new line.
+
