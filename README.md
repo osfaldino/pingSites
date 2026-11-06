@@ -7,7 +7,7 @@ sudo cp pingSites /usr/local/bin/ # move the program to bin
 sudo cp sites.conf /usr/local/bin/ # move the config to bin
 ```
 
-###How to edit the configuration file?
+### How to edit the configuration file?
 ```bash
 sudo nano /usr/local/bin/sites.conf # edit the config file
 ```
