@@ -12,7 +12,7 @@ import (
 type Response struct {
 	Duration time.Duration
 	URL      string
-	Succes   bool
+	Success  bool
 }
 
 func Ping(url string, ch chan Response) {
@@ -24,19 +24,19 @@ func Ping(url string, ch chan Response) {
 
 	resp, err := client.Get(url)
 	if err != nil {
-		ch <- Response{Duration: time.Since((start)), URL: url, Succes: false}
+		ch <- Response{Duration: time.Since((start)), URL: url, Success: false}
 		return
 	}
 
 	defer resp.Body.Close()
 
-	ch <- Response{Duration: time.Since((start)), URL: url, Succes: true}
+	ch <- Response{Duration: time.Since((start)), URL: url, Success: true}
 }
 
 func main() {
-	exePath, err := os.Executable() // путь до бинарника
+	exePath, err := os.Executable() // path to execute file
 	if err != nil {
-		fmt.Println("❌ Не удалось определить путь к программе:", err)
+		fmt.Println("❌ Cannot found path to exec file:", err)
 		return
 	}
 
@@ -44,7 +44,7 @@ func main() {
 
 	data, err := os.ReadFile(configPath)
 	if err != nil {
-		fmt.Println("❌ Ошибка при чтении конфига:", err)
+		fmt.Println("❌ Error while reading config:", err)
 		return
 	}
 
@@ -65,8 +65,8 @@ func main() {
 	for i := 0; i < counter; i++ {
 		res := <-ch
 
-		if res.Succes {
-			fmt.Printf("✅ %-30s  |  Время: %v\n", res.URL, res.Duration)
+		if res.Success {
+			fmt.Printf("✅ %-30s  |  Time: %v\n", res.URL, res.Duration)
 		} else {
 			fmt.Printf("❌ %s\n", res.URL)
 		}
